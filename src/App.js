@@ -21,7 +21,7 @@ class App extends Component {
           "&client_secret=" +
           process.env.REACT_APP_CLIENT_SECRET +
           "&q=" +
-          this.state.query
+          this.state.query + '&limit=5'
       )
       .then((response) => {
         this.setState({ beers: response.data.response.beers.items });
@@ -40,6 +40,10 @@ class App extends Component {
           </p>
         </div>
       );
+    });
+
+    const bars = this.state.beers.map((beer) => {
+      return ({x: beer.beer.beer_name, y: beer.checkin_count });
     });
 
     return (
@@ -61,12 +65,7 @@ class App extends Component {
           Search
         </button>
         <div>{beers}</div>
-        <BarChart data={[
-            { x: "lizard", y: 1234 },
-            { x: "sne", y: 2048 },
-            { x: "crocodile", y: 2600 },
-            { x: "alligator", y: 9000 },
-          ]}/>
+        <BarChart data={bars}/>
       </div>
     );
   }
