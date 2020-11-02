@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BarChart from './Charts/BarChart/BarChart';
+import Tabs from './Components/Tabs/Tab';
 
 class App extends Component {
   state = {
@@ -47,7 +48,8 @@ class App extends Component {
     });
 
     return (
-      <div class="container-fluid">
+      <div class="container-sm">
+        <Tabs />
         <div className="form-group">
           <label for="exampleInputPassword1">Search beer</label>
           <input
