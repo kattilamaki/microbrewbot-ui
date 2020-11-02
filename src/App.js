@@ -8,6 +8,7 @@ class App extends Component {
   state = {
     beers: [],
     query: '',
+    totalCount: 0
   };
 
   handleInput = (event) => {
@@ -23,10 +24,10 @@ class App extends Component {
           process.env.REACT_APP_CLIENT_SECRET +
           '&q=' +
           this.state.query +
-          '&limit=5'
+          '&limit=10'
       )
       .then((response) => {
-        this.setState({ beers: response.data.response.beers.items });
+        this.setState({ beers: response.data.response.beers.items, totalCount: response.data.response.found});
       })
       .catch((err) => {
         console.log(err);
@@ -78,6 +79,7 @@ class App extends Component {
             </thead>
             <tbody>{beers}</tbody>
           </table>
+          <p><b>Total found: {this.state.totalCount}</b></p>
         </div>
         <BarChart data={bars} />
       </div>
