@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BarChart from './Charts/BarChart/BarChart';
 
 class App extends Component {
   state = {
@@ -60,6 +61,12 @@ class App extends Component {
           Search
         </button>
         <div>{beers}</div>
+        <BarChart data={[
+            { x: "lizard", y: 1234 },
+            { x: "sne", y: 2048 },
+            { x: "crocodile", y: 2600 },
+            { x: "alligator", y: 9000 },
+          ]}/>
       </div>
     );
   }
