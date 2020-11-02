@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import BarChart from './Charts/BarChart/BarChart';
 import Tabs from './Components/Tabs/Tab';
 
 class App extends Component {
   state = {
     beers: [],
-    query: "",
+    query: '',
   };
 
   handleInput = (event) => {
@@ -17,12 +17,13 @@ class App extends Component {
   getBeers = () => {
     axios
       .get(
-        "https://api.untappd.com/v4/search/beer?client_id=" +
+        'https://api.untappd.com/v4/search/beer?client_id=' +
           process.env.REACT_APP_CLIENT_ID +
-          "&client_secret=" +
+          '&client_secret=' +
           process.env.REACT_APP_CLIENT_SECRET +
-          "&q=" +
-          this.state.query + '&limit=5'
+          '&q=' +
+          this.state.query +
+          '&limit=5'
       )
       .then((response) => {
         this.setState({ beers: response.data.response.beers.items });
@@ -35,16 +36,16 @@ class App extends Component {
   render() {
     const beers = this.state.beers.map((beer) => {
       return (
-        <div>
-          <p>
-            {beer.beer.beer_name} - {beer.checkin_count}
-          </p>
-        </div>
+        <tr>
+          <td>{beer.beer.beer_name}</td>
+          <td>{beer.brewery.brewery_name}</td>
+          <td>{beer.checkin_count}</td>
+        </tr>
       );
     });
 
     const bars = this.state.beers.map((beer) => {
-      return ({x: beer.beer.beer_name, y: beer.checkin_count });
+      return { x: beer.beer.beer_name, y: beer.checkin_count };
     });
 
     return (
@@ -66,8 +67,19 @@ class App extends Component {
         >
           Search
         </button>
-        <div>{beers}</div>
-        <BarChart data={bars}/>
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Beer</th>
+                <th scope="col">Brewery</th>
+                <th scope="col">Check-in #</th>
+              </tr>
+            </thead>
+            <tbody>{beers}</tbody>
+          </table>
+        </div>
+        <BarChart data={bars} />
       </div>
     );
   }
