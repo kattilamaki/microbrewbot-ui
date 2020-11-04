@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import LineChart from "../../Charts/LineChart/LineChart";
 
 class Checkins extends Component {
   constructor(props) {
@@ -33,7 +34,13 @@ class Checkins extends Component {
     });
 
     return (
-    <div>{scores}</div>
+    <div><LineChart data={[
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 5 },
+        { x: 4, y: 4 },
+        { x: 5, y: 7 }
+      ]}/></div>
     );
   }
 }
