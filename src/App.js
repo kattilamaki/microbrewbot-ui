@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import BarChart from './Charts/BarChart/BarChart';
-import ResultTable from './components/ResultTable/ResultTable';
-import Pagination from './components/Pagination/Pagination';
-import SearchForm from './components/SearchForm/SearchForm';
+import React, { Component } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import BarChart from "./Charts/BarChart/BarChart";
+import ResultTable from "./components/ResultTable/ResultTable";
+import Pagination from "./components/Pagination/Pagination";
+import SearchForm from "./components/SearchForm/SearchForm";
 
 class App extends Component {
   state = {
     beers: [],
-    query: '',
+    query: "",
     totalCount: 0,
-    selectedBeer: ""
+    selectedBeer: "",
   };
 
   handleInput = (event) => {
@@ -21,16 +21,19 @@ class App extends Component {
   getBeers = () => {
     axios
       .get(
-        'https://api.untappd.com/v4/search/beer?client_id=' +
+        "https://api.untappd.com/v4/search/beer?client_id=" +
           process.env.REACT_APP_CLIENT_ID +
-          '&client_secret=' +
+          "&client_secret=" +
           process.env.REACT_APP_CLIENT_SECRET +
-          '&q=' +
+          "&q=" +
           this.state.query +
-          '&limit=6'
+          "&limit=6"
       )
       .then((response) => {
-        this.setState({ beers: response.data.response.beers.items, totalCount: response.data.response.found});
+        this.setState({
+          beers: response.data.response.beers.items,
+          totalCount: response.data.response.found,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -54,22 +57,7 @@ class App extends Component {
 
     return (
       <div class="container-sm">
-        <div className="form-group">
-          <label for="exampleInputPassword1">Search beer</label>
-          <input
-            type="search"
-            className="form-control"
-            id="exampleInputPassword1"
-            onChange={this.handleInput}
-          />
-        </div>
-        <button
-          type="submit"
-          onClick={this.getBeers}
-          className="btn btn-primary"
-        >
-          Search
-        </button>
+        <SearchForm handleInput={this.handleInput} getBeers={this.getBeers} />
         <div>
           <ResultTable beers={beers} />
           <Pagination totalCount={this.state.totalCount} />
