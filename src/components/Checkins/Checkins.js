@@ -12,7 +12,7 @@ class Checkins extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://api.untappd.com/v4/beer/checkins/9459?client_id=" +
+        "https://api.untappd.com/v4/beer/checkins/" + this.props.beer + "?client_id=" +
           process.env.REACT_APP_CLIENT_ID +
           "&client_secret=" +
           process.env.REACT_APP_CLIENT_SECRET
@@ -26,14 +26,14 @@ class Checkins extends Component {
   }
 
   render() {
-    const checkins = this.state.checkins.map((checkin) => {
+    const scores = this.state.checkins.map((checkin) => {
       return (
-        <p>{checkin.created_at}</p>
+      <p>{checkin.rating_score}</p>
       );
     });
 
     return (
-    <div>{checkins}</div>
+    <div>{scores}</div>
     );
   }
 }
