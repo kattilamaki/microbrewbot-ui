@@ -10,7 +10,7 @@ class Checkins extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     axios
       .get(
         "https://api.untappd.com/v4/beer/checkins/" + this.props.beer + "?client_id=" +
