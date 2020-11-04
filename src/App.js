@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BarChart from './Charts/BarChart/BarChart';
-import Tabs from './Components/Tabs/Tab';
 
 class App extends Component {
   state = {
@@ -24,7 +23,7 @@ class App extends Component {
           process.env.REACT_APP_CLIENT_SECRET +
           '&q=' +
           this.state.query +
-          '&limit=10'
+          '&limit=6'
       )
       .then((response) => {
         this.setState({ beers: response.data.response.beers.items, totalCount: response.data.response.found});
@@ -51,7 +50,6 @@ class App extends Component {
 
     return (
       <div class="container-sm">
-        <Tabs />
         <div className="form-group">
           <label for="exampleInputPassword1">Search beer</label>
           <input
