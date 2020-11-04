@@ -5,15 +5,21 @@ import BarChart from "./Charts/BarChart/BarChart";
 import ResultTable from "./components/ResultTable/ResultTable";
 import Pagination from "./components/Pagination/Pagination";
 import SearchForm from "./components/SearchForm/SearchForm";
+import BeerInfo from "./components/BeerInfo/BeerInfo";
+import Checkins from "./components/Checkins/Checkins";
 
 class App extends Component {
-  state = {
-    beers: [],
-    query: "",
-    totalCount: 0,
-    beerSelected: false,
-    selectedBeer: null
-  };
+
+    constructor(props) { 
+     super(props);
+     this.state = {
+      beers: [],
+      query: "",
+      totalCount: 0,
+      beerSelected: false,
+      selectedBeer: null
+    };
+  }
 
   handleInput = (event) => {
     this.setState({ query: event.target.value });
@@ -21,6 +27,7 @@ class App extends Component {
 
   handleSelection = (bid) => {
     this.setState({beerSelected: true, selectedBeer: bid});
+    console.log(bid);
   };
 
   getBeers = () => {
@@ -67,7 +74,7 @@ class App extends Component {
           <ResultTable beers={beers} />
           <Pagination totalCount={this.state.totalCount} />
         </div>
-        {this.state.beerSelected ? <Pagination totalCount={this.state.totalCount} /> : <BarChart data={bars} />}
+        {this.state.beerSelected ? <Checkins beer={this.state.selectedBeer}/> : <BarChart data={bars} />}
       </div>
     );
   }

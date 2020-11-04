@@ -11,6 +11,7 @@ const SearchForm = (props) => {
           id="exampleInputPassword1"
           onChange={props.handleInput}
         />
+        <small id="searchHelp" class="form-text text-muted">Brewery name or beer name could be used</small>
       </div>
       <div className="form-group">
         <button

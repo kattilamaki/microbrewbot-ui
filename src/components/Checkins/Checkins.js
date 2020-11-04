@@ -1,30 +1,41 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-const Checkins = (props) => {
+class Checkins extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        checkins: []
+    };
+  }
 
-//   const getCheckins = () => {
-//     axios
-//       .get(
-//         "https://api.untappd.com/v4/beer/checkins?client_id=" +
-//           process.env.REACT_APP_CLIENT_ID +
-//           "&client_secret=" +
-//           process.env.REACT_APP_CLIENT_SECRET +
-//           "&BID=7481"
-//       )
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
+  componentDidMount() {
+    axios
+      .get(
+        "https://api.untappd.com/v4/beer/checkins/9459?client_id=" +
+          process.env.REACT_APP_CLIENT_ID +
+          "&client_secret=" +
+          process.env.REACT_APP_CLIENT_SECRET
+      )
+      .then((response) => {
+        this.setState({checkins: response.data.response.checkins.items});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-  return (
-    <p>
-      <b>getinfo</b>
-    </p>
-  );
-};
+  render() {
+    const checkins = this.state.checkins.map((checkin) => {
+      return (
+        <p>{checkin.created_at}</p>
+      );
+    });
+
+    return (
+    <div>{checkins}</div>
+    );
+  }
+}
 
 export default Checkins;
