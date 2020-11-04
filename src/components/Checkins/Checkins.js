@@ -28,19 +28,11 @@ class Checkins extends Component {
 
   render() {
     const scores = this.state.checkins.map((checkin) => {
-      return (
-      <p>{checkin.rating_score}</p>
-      );
+      return { y: checkin.rating_score};
     });
 
     return (
-    <div><LineChart data={[
-        { x: 1, y: 2 },
-        { x: 2, y: 3 },
-        { x: 3, y: 5 },
-        { x: 4, y: 4 },
-        { x: 5, y: 7 }
-      ]}/></div>
+    <div><LineChart data={scores}/></div>
     );
   }
 }
