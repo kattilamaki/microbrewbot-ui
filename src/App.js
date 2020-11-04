@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BarChart from './Charts/BarChart/BarChart';
+import ResultTable from './components/ResultTable/ResultTable';
+import Pagination from './components/Pagination/Pagination';
+import SearchForm from './components/SearchForm/SearchForm';
 
 class App extends Component {
   state = {
     beers: [],
     query: '',
-    totalCount: 0
+    totalCount: 0,
+    selectedBeer: ""
   };
 
   handleInput = (event) => {
@@ -67,17 +71,8 @@ class App extends Component {
           Search
         </button>
         <div>
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Beer</th>
-                <th scope="col">Brewery</th>
-                <th scope="col">Check-in #</th>
-              </tr>
-            </thead>
-            <tbody>{beers}</tbody>
-          </table>
-          <p><b>Total found: {this.state.totalCount}</b></p>
+          <ResultTable beers={beers} />
+          <Pagination totalCount={this.state.totalCount} />
         </div>
         <BarChart data={bars} />
       </div>
