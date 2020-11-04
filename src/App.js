@@ -11,11 +11,16 @@ class App extends Component {
     beers: [],
     query: "",
     totalCount: 0,
-    selectedBeer: "",
+    beerSelected: false,
+    selectedBeer: null
   };
 
   handleInput = (event) => {
     this.setState({ query: event.target.value });
+  };
+
+  handleSelection = (bid) => {
+    this.setState({beerSelected: true, selectedBeer: bid});
   };
 
   getBeers = () => {
@@ -43,7 +48,7 @@ class App extends Component {
   render() {
     const beers = this.state.beers.map((beer) => {
       return (
-        <tr>
+        <tr onClick={() => this.handleSelection(beer.beer.bid)}>
           <td>{beer.beer.beer_name}</td>
           <td>{beer.brewery.brewery_name}</td>
           <td>{beer.checkin_count}</td>
@@ -62,7 +67,7 @@ class App extends Component {
           <ResultTable beers={beers} />
           <Pagination totalCount={this.state.totalCount} />
         </div>
-        <BarChart data={bars} />
+        {this.state.beerSelected ? <Pagination totalCount={this.state.totalCount} /> : <BarChart data={bars} />}
       </div>
     );
   }
