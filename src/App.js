@@ -71,7 +71,7 @@ class App extends Component {
     const beers = this.state.beers.map((beer) => {
       return (
         <tr onClick={() => this.handleSelection(beer.beer.bid)}>
-          <td>{beer.beer.beer_name}</td>
+          <td><p className="text-primary">{beer.beer.beer_name}</p></td>
           <td>{beer.brewery.brewery_name}</td>
           <td>{beer.checkin_count}</td>
         </tr>
