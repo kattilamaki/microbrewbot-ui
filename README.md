@@ -1,7 +1,8 @@
 # Simple UI for Untappd data
 
 ## About
-Started project to access https://untappd.com public data through API
+Started project to access https://untappd.com public data through API. Running example could
+be found from https://microbrewbot-ui.herokuapp.com.
 
 ## Installation
 
