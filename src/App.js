@@ -81,7 +81,7 @@ class App extends Component {
 
     // Format data for Victory bar chart
     const bars = this.state.beers.map((beer) => {
-      return { x: beer.beer.beer_name, y: beer.checkin_count };
+      return { x: beer.beer.beer_name.substring(0, 10), y: beer.checkin_count };
     });
 
     return (
@@ -94,7 +94,7 @@ class App extends Component {
           <ResultTable beers={beers} />
           <Pagination totalCount={this.state.totalCount} />
         </div>
-        {this.state.beerSelected !== null ? <Checkins beer={this.state.selectedBeer}/> : <BarChart data={bars} />}
+        {this.state.selectedBeer ? <Checkins beer={this.state.selectedBeer}/> : <BarChart data={bars} />}
       </div>
     );
   }
