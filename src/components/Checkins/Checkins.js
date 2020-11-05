@@ -6,12 +6,14 @@ class Checkins extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        checkins: []
+        checkins: [],
+        selectedBeer: null
     };
   }
 
   componentDidUpdate() {
-    axios
+    if (this.state.selectedBeer !== this.props.beer) {
+      axios
       .get(
         "https://api.untappd.com/v4/beer/checkins/" + this.props.beer + "?client_id=" +
           process.env.REACT_APP_CLIENT_ID +
@@ -19,11 +21,13 @@ class Checkins extends Component {
           process.env.REACT_APP_CLIENT_SECRET
       )
       .then((response) => {
-        this.setState({checkins: response.data.response.checkins.items});
+        this.setState({checkins: response.data.response.checkins.items,
+        selectedBeer: this.props.beer});
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   }
 
   render() {

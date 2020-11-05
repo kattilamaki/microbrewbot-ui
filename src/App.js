@@ -39,6 +39,7 @@ class App extends Component {
   // Store selected beer for additional details
   handleSelection = (bid) => {
     this.setState({beerSelected: true, selectedBeer: bid});
+    console.log(this.state.beerSelected);
   };
 
   // Make API request and get secrets from .env file. Show errors on ui
@@ -93,7 +94,7 @@ class App extends Component {
           <ResultTable beers={beers} />
           <Pagination totalCount={this.state.totalCount} />
         </div>
-        {this.state.beerSelected ? <Checkins beer={this.state.selectedBeer}/> : <BarChart data={bars} />}
+        {this.state.beerSelected !== null ? <Checkins beer={this.state.selectedBeer}/> : <BarChart data={bars} />}
       </div>
     );
   }
