@@ -21,6 +21,12 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    // Put focus automatically to the only input field
+    const input = document.querySelector("input");
+    input.focus();
+  }
+
   handleInput = (event) => {
     this.setState({ query: event.target.value });
   };
@@ -69,6 +75,8 @@ class App extends Component {
 
     return (
       <div class="container-sm">
+        <h2>microbrebot</h2>
+        <p>Search beers, get total checkin counts and beer related ratings in from one app</p>
         <SearchForm handleInput={this.handleInput} getBeers={this.getBeers} />
         <div>
           <ResultTable beers={beers} />
