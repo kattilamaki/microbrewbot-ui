@@ -7,6 +7,7 @@ import Pagination from "./components/Pagination/Pagination";
 import SearchForm from "./components/SearchForm/SearchForm";
 import BeerInfo from "./components/BeerInfo/BeerInfo";
 import Checkins from "./components/Checkins/Checkins";
+import RequestsLeft from "./components/RequestsLeft/RequestsLeft";
 
 class App extends Component {
 
@@ -17,7 +18,8 @@ class App extends Component {
       query: "",
       totalCount: 0,
       beerSelected: false,
-      selectedBeer: null
+      selectedBeer: null,
+      errorMessage: null
     };
   }
 
@@ -54,7 +56,9 @@ class App extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({
+          errorMessage: err.response.data.meta.error_detail
+        });
       });
   };
 
@@ -77,6 +81,7 @@ class App extends Component {
       <div class="container-sm">
         <h2>microbrebot</h2>
         <p>Search beers, get total checkin counts and beer related ratings in from one app</p>
+        <RequestsLeft message={this.state.errorMessage} />
         <SearchForm handleInput={this.handleInput} getBeers={this.getBeers} />
         <div>
           <ResultTable beers={beers} />
