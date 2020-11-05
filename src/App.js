@@ -70,7 +70,7 @@ class App extends Component {
   render() {
     const beers = this.state.beers.map((beer) => {
       return (
-        <tr onClick={() => this.handleSelection(beer.beer.bid)}>
+        <tr onClick={() => this.handleSelection(beer.beer.bid)} key={beer.beer.bid}>
           <td><p className="text-primary">{beer.beer.beer_name}</p></td>
           <td>{beer.brewery.brewery_name}</td>
           <td>{beer.checkin_count}</td>
@@ -84,7 +84,7 @@ class App extends Component {
     });
 
     return (
-      <div class="container-sm">
+      <div className="container-sm">
         <h2>microbrebot</h2>
         <p>Search beers, get total checkin counts and beer related ratings in from one app</p>
         <RequestsLeft message={this.state.errorMessage} />

@@ -4,7 +4,7 @@ const SearchForm = (props) => {
   return (
     <div>
       <div className="form-row">
-        <div class="col">
+        <div className="col">
           <input
             type="search"
             placeholder="Search beer"
@@ -12,11 +12,11 @@ const SearchForm = (props) => {
             id="search-beers"
             onChange={props.handleInput}
           />
-          <small id="searchHelp" class="form-text text-muted">
+          <small id="searchHelp" className="form-text text-muted">
           Brewery name or beer name could be used
         </small>
         </div>
-        <div class="col">
+        <div className="col">
           <button
             type="submit"
             onClick={props.getBeers}

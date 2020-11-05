@@ -3,7 +3,7 @@ import React from "react";
 const RequestsLeft = (props) => {
     if (props.message) {
         return (
-            <div class="alert alert-warning" role="alert">
+            <div className="alert alert-warning" role="alert">
           {props.message}
         </div>
           );
