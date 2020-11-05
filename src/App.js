@@ -86,7 +86,7 @@ class App extends Component {
 
     return (
       <div className="container-sm">
-        <h2>microbrebot</h2>
+        <h2>microbrewbot</h2>
         <p>Search beers, get total checkin counts and beer related ratings in from one app</p>
         <RequestsLeft message={this.state.errorMessage} />
         <SearchForm handleInput={this.handleInput} getBeers={this.getBeers} />
