@@ -5,7 +5,6 @@ import BarChart from "./Charts/BarChart/BarChart";
 import ResultTable from "./components/ResultTable/ResultTable";
 import Pagination from "./components/Pagination/Pagination";
 import SearchForm from "./components/SearchForm/SearchForm";
-import BeerInfo from "./components/BeerInfo/BeerInfo";
 import Checkins from "./components/Checkins/Checkins";
 import RequestsLeft from "./components/RequestsLeft/RequestsLeft";
 
@@ -21,23 +20,28 @@ class App extends Component {
       selectedBeer: null,
       errorMessage: null
     };
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
+    this.getBeers = this.getBeers.bind(this);
   }
 
+  // Put focus automatically to the only input field
   componentDidMount() {
-    // Put focus automatically to the only input field
     const input = document.querySelector("input");
     input.focus();
   }
 
+  // Update search query from input field
   handleInput = (event) => {
     this.setState({ query: event.target.value });
   };
 
+  // Store selected beer for additional details
   handleSelection = (bid) => {
     this.setState({beerSelected: true, selectedBeer: bid});
-    console.log(bid);
   };
 
+  // Make API request and get secrets from .env file. Show errors on ui
   getBeers = () => {
     axios
       .get(
@@ -62,6 +66,7 @@ class App extends Component {
       });
   };
 
+  // Parse used data from the response
   render() {
     const beers = this.state.beers.map((beer) => {
       return (
@@ -73,6 +78,7 @@ class App extends Component {
       );
     });
 
+    // Format data for Victory bar chart
     const bars = this.state.beers.map((beer) => {
       return { x: beer.beer.beer_name, y: beer.checkin_count };
     });
