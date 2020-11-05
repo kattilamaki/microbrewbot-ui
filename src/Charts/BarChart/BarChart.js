@@ -3,6 +3,7 @@ import React from "react";
 import {
     VictoryBar,
     VictoryChart,
+    VictoryTheme,
   } from "victory";
 
 const BarChart = (props) => {
@@ -10,8 +11,9 @@ const BarChart = (props) => {
   if (props.data.length !== 0) {
     return (
       <VictoryChart
+      theme={VictoryTheme.material}
       width={500}
-      domainPadding={{ x: 10 }}
+      domainPadding={{ x: 40 }}
       >
           <VictoryBar
           animate={{
